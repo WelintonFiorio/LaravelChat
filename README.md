@@ -82,3 +82,87 @@ DB_PORT=3306
 DB_DATABASE=chat
 DB_USERNAME=seu_usuario
 DB_PASSWORD=sua_senha
+```
+### Diagrama UML
+
+O diagrama UML a seguir ilustra a arquitetura e o design do sistema **LaravelChat**. Ele fornece uma visão geral das principais classes e seus relacionamentos dentro do sistema.
+
+![Diagrama UML](docs/chat_uml_diagram.png)
+
+### Gerenciamento de Usuários
+
+#### **Classes e Repositórios:**
+
+1. **`User`**
+    - **Descrição:** Classe que representa um usuário do sistema. Gerencia informações como nome, e-mail e senha.
+    - **Localização:** `app/Models/User.php`
+
+2. **`UserRepositoryInterface`**
+    - **Descrição:** Interface que define os métodos necessários para a manipulação dos dados dos usuários. Facilita a abstração e a implementação de diferentes fontes de dados.
+    - **Localização:** `app/Repositories/UserRepositoryInterface.php`
+
+3. **`EloquentUserRepository`**
+    - **Descrição:** Implementação da interface `UserRepositoryInterface` usando Eloquent ORM. Fornece métodos para interagir com a tabela de usuários no banco de dados.
+    - **Localização:** `app/Repositories/EloquentUserRepository.php`
+
+4. **`UserService`**
+    - **Descrição:** Serviço que contém a lógica de negócio relacionada aos usuários. Gerencia operações como registro, autenticação e atualização de perfil.
+    - **Localização:** `app/Service/UserService.php`
+
+
+    
+
+### Sistema de Mensagens
+
+#### **Classes e Interfaces:**
+
+1. **`Message`**
+    - **Descrição:** Classe concreta que estende `Model`. Representa uma mensagem enviada por um usuário no sistema, contendo informações como conteúdo, data/hora e remetente.
+    - **Localização:** `app/Models/Message.php`
+
+2. **`BaseMessage`**
+    - **Descrição:** Classe abstrata que serve como base para diferentes tipos de mensagens. Contém propriedades comuns como conteúdo, timestamp e remetente.
+    - **Localização:** `app/Messages/BaseMessage.php`
+
+3. **`TextMessage`**
+    - **Descrição:** Classe concreta que estende `BaseMessage`. Representa uma mensagem de texto no sistema.
+    - **Localização:** `app/Messages/TextMessage.php`
+
+4. **`TextMessageFactory`**
+    - **Descrição:** Fábrica responsável por criar instâncias de `TextMessage`. Implementa a interface `MessageFactory`.
+    - **Localização:** `app/Factories/TextMessageFactory.php`
+
+5. **`MessageRepositoryInterface`**
+    - **Descrição:** Interface que define os métodos necessários para a manipulação de mensagens. Facilita a abstração e a implementação de diferentes fontes de dados.
+    - **Localização:** `app/Repositories/MessageRepositoryInterface.php`
+
+6. **`MessageRepository`**
+    - **Descrição:** Classe responsável pela manipulação e persistência de mensagens no banco de dados, implementando a interface `MessageRepositoryInterface`.
+    - **Localização:** `app/Repositories/MessageRepository.php`
+
+
+
+### Sistema de Amizades
+
+#### **Classes e Interfaces:**
+
+1. **`Friendship`**
+    - **Descrição:** Classe que representa a relação de amizade entre dois usuários. Contém informações sobre os IDs dos usuários e o status da amizade.
+    - **Localização:** `app/Models/Friendship.php`
+
+2. **`FriendshipManagerInterface`**
+    - **Descrição:** Interface que define os métodos necessários para gerenciar amizades entre usuários. Inclui operações como enviar, aceitar, rejeitar e remover pedidos de amizade.
+    - **Localização:** `app/Contract/FriendshipManagerInterface.php`
+
+3. **`FriendshipRepositoryInterface`**
+    - **Descrição:** Interface que define os métodos necessários para a manipulação dos dados de amizades. Facilita a abstração e a implementação de diferentes fontes de dados.
+    - **Localização:** `app/Contract/FriendshipRepositoryInterface.php`
+
+4. **`FriendshipRepository`**
+    - **Descrição:** Classe responsável pela manipulação e persistência das amizades no banco de dados, implementando a interface `FriendshipRepositoryInterface`.
+    - **Localização:** `app/Repositories/FriendshipRepository.php`
+
+5. **`FriendshipManage`**
+    - **Descrição:** Serviço que contém a lógica de negócio relacionada à gestão de amizades. Gerencia operações como envio de pedidos de amizade, aceitação e remoção de amigos.
+    - **Localização:** `app/Service/FriendshipManage.php`
+
