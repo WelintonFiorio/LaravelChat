@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * Classe User representa um usuário no sistema.
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Hash;
  */
 class User extends Authenticatable
 {
-    use Notifiable, HasFactory;
+    use Notifiable, HasFactory,HasApiTokens;
 
     /**
      * Os atributos que são atribuíveis em massa.
